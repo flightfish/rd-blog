@@ -293,7 +293,7 @@ public static void quickSort2(int[] arr){
             int end=stack.pop();
             int start=stack.pop();
 
-            if(end-start<2){
+            if(low >= high){
                 continue;
             }
             //int mid=(start+end)/2;
@@ -350,6 +350,7 @@ public static void quickSort2(int[] arr){
 
 # 归并排序
 
+## java语言版本
 ```java
 递归
  public static void mergeSort(int[] a, int low, int high) {
@@ -422,6 +423,95 @@ public static void merge_sort(int[] arr) {
     }
     result = arr;       
 }
+```
+## go语言版本
+```go
+//递归
+func mergeSort(arr []int,low,high int)  {
+	if low>=high{
+		return
+	}
+	mid:=(low+high)>>1
+	mergeSort(arr,low,mid)
+	mergeSort(arr,mid+1,high)
+	merge(arr,low,mid,high)
+}
+func merge(arr []int,low,mid,high int)  {
+	temp:=make([]int,high-low+1)
+	i,j,k:=low,mid+1,0
+	for i<=mid&&j<=high{
+		if arr[i]<=arr[j]{
+			temp[k]=arr[i]
+			i++
+		}else{
+			temp[k]=arr[j]
+			j++
+		}
+		k++
+	}
+	for i<=mid{
+		temp[k]=arr[i]
+		i++
+		k++
+	}
+	for j<=high{
+		temp[k]=arr[j]
+		j++
+		k++
+	}
+	for i := low; i <=high ; i++ {
+		arr[i]=temp[i-low]
+	}
+	fmt.Println(arr)
+}
+//迭代
+func mergeSort(arr []int,low,high int)  {
+	if low>=high{
+		return
+	}
+
+	n:=high-low+1
+	result:=make([]int,n)
+	for block := 1; block <n ; block*=2 {
+		for start := 0; start <n ; start+= 2 * block {
+			low:=start
+			mid:=start + block
+			if mid>n{
+				mid=n
+			}
+			high:=start + 2*block
+			if high>n{
+				high=n
+			}
+			 start1,end1 := low, mid
+			 start2,end2:= mid,high
+			for start1 < end1 && start2 < end2 {
+				if arr[start1] < arr[start2]{
+					result[low]=arr[start1]
+					start1++
+				}else{
+					result[low]=arr[start2]
+					start2++
+				}
+				low++
+			}
+			for start1 < end1 {
+				result[low] = arr[start1]
+				start1++
+				low++
+			}
+			for start2 < end2 {
+				result[low] = arr[start2]
+				start2++
+				low++
+			}
+			fmt.Println(result)
+		}
+		copy(arr,result)
+
+	}
+}
+
 ```
 
 # 桶排序

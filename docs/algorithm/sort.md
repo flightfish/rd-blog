@@ -206,7 +206,7 @@ public static int[]  insertSort(int[] arr){
 
 # 快速排序
 
-php语言版本
+## php语言版本
 ```php
 function quickSort($arr)
 {
@@ -236,7 +236,7 @@ function quickSort($arr)
     // return array_merge($rightArray, array($middle), $leftArray);
 }
 ```
-go语言版本
+## go语言版本
 ```go
 //递归 
 func quickSort(arr []int,low,high int)  {
@@ -281,7 +281,7 @@ func partition(arr []int,low,high int)int  {
 	return i
 }
 ```
-java语言版本
+## java语言版本
 ```java
 //迭代
 public static void quickSort2(int[] arr){

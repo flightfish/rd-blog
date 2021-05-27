@@ -6,7 +6,7 @@
 
 **如何支持：**
 - 关注公众号 [flightfish的公众号](https://captainybz-1304372915.cos.ap-nanjing.myqcloud.com/rd-blog/img/wx_subscribe.jpg)
-- 进入blog [flightfish的blog](http://flightfish.club)
+- 点击进入blog [flightfish的blog](http://flightfish.club)
 - 点击右上角Star :star: 给予关注
 - 分享给您身边更多的小伙伴
 

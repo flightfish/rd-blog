@@ -597,8 +597,8 @@ func min (x,y int)int{
 ```
 
 # 计数排序
-
-```
+## java语言版本
+```java
 // 计数排序。假设数组中存储的都是非负整数。
   public static void countSort(int[] arr){
         int len = arr.length;
@@ -634,9 +634,13 @@ func min (x,y int)int{
         }
     }
 ```
+## go语言版本
+```go
+
+```
 
 # 基数排序
-```
+```java
  public static void radixSort(int[] arr) {
         int len = arr.length;
         int d = maxbit(arr);

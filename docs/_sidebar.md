@@ -6,6 +6,8 @@
     - [Queue 队列](/algorithm/queue.md)
     - [Stack 栈](/algorithm/stack.md)
     - [排序](/algorithm/sort.md)
+    - [skiplist 跳表](/algorithm/skiplist.md)
+    - [tree 树](/algorithm/tree.md)
     - [BST 二叉搜索树](/algorithm/bst.md)
     - [经典算法](/algorithm/summary.md)
 

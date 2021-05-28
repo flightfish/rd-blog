@@ -73,3 +73,6 @@ func remainder(x, a, p int) int {
 [279. 完全平方数](https://leetcode-cn.com/problems/perfect-squares/)
 
 
+# 卡塔兰数
+
+# 并查集

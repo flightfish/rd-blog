@@ -804,6 +804,41 @@ func maxbit(arr []int) int {
 ```
 ## go语言版本
 ```go
+func heapSort(arr []int)  {
+	n:=len(arr)
+	if n<=1{
+		return
+	}
+	buildHeap(arr)
+	k := n-1
+	for k >0 {
+		arr[0],arr[k]=arr[k],arr[0]
+		k--
+		heapify(arr,k,0)
+	}
+}
+func buildHeap(arr []int)  {
+	n:=len(arr)-1
+	for i := (n-1)/2; i >=0 ; i-- {
+		heapify(arr,n,i)
+	}
+}
+func heapify(arr []int,n,i int)  {
+	for  {
+		maxPos:=i
+		if 2*i+1<=n&&arr[maxPos]<arr[2*i+1]{
+			maxPos=2*i+1
+		}
+		if 2*i+2<=n&&arr[maxPos]<arr[2*i+2]{
+			maxPos=2*i+2
+		}
+		if maxPos==i{
+			break
+		}
+		arr[i],arr[maxPos]=arr[maxPos],arr[i]
+		i=maxPos
+	}
+}
 
 ```
 

@@ -333,7 +333,7 @@ current 是链表中第一个元素的引用，对于移除第一个元素，我
 
 ## 必知必会算法题
 
-- 实现两个有序数组合并为一个有序数组
+### 实现两个有序数组合并为一个有序数组
 
 ```go
 func merge(nums1 []int, m int, nums2 []int, n int)  {
@@ -362,7 +362,7 @@ func merge(nums1 []int, m int, nums2 []int, n int)  {
 
 ```
 
-- 单链表反转
+### 单链表反转
 
 ```go
 func reverseList(head *ListNode) *ListNode {
@@ -378,7 +378,7 @@ func reverseList(head *ListNode) *ListNode {
 }
 ```
 
-- 中环的检测
+### 中环的检测
 
 ```go
 func hasCycle(head *ListNode) bool {
@@ -397,7 +397,7 @@ func hasCycle(head *ListNode) bool {
 }
 ```
 
-- 两个有序的链表合并
+### 两个有序的链表合并
 
 ```go
 func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
@@ -423,7 +423,7 @@ func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 }
 ```
 
-- 删除链表倒数第 n 个结点
+### 删除链表倒数第 n 个结点
 
 ```go
 func removeNthFromEnd(head *ListNode, n int) *ListNode {
@@ -440,7 +440,7 @@ func removeNthFromEnd(head *ListNode, n int) *ListNode {
 }
 ```
 
-- 回文链表
+### 回文链表
 
 ```go
 func isPalindrome(head *ListNode) bool {
@@ -460,7 +460,7 @@ func isPalindrome(head *ListNode) bool {
 	return true
 }
 ```
-- 环形链表入口
+### 环形链表入口
 ```go
 func detectCycle(head *ListNode) *ListNode {
     	if head == nil {

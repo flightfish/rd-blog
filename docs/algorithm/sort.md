@@ -636,6 +636,33 @@ func min (x,y int)int{
 ```
 ## go语言版本
 ```go
+func countSort(arr []int)  {
+	n:=len(arr)
+	if n<=1{
+		return
+	}
+	maxNum:=arr[0]
+	for i := 0; i <n ; i++ {
+		maxNum=max(maxNum,arr[i])
+	}
+	c:=make([]int,maxNum+1)
+	for _, v := range arr {
+		c[v]++
+	}
+	for i := 0; i <maxNum ; i++ {
+
+	}
+	for i := 1; i <=maxNum; i++ {
+		c[i]+=c[i-1]
+	}
+	r:=make([]int,n)
+	for i := n-1; i >=0 ; i-- {
+		index:=c[arr[i]]-1
+		r[index]=arr[i]
+		c[arr[i]]--
+	}
+	copy(arr,r)
+}
 
 ```
 

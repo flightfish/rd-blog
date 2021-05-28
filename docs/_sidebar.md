@@ -7,7 +7,7 @@
     - [Stack 栈](/algorithm/stack.md)
     - [排序](/algorithm/sort.md)
     - [BST 二叉搜索树](/algorithm/bst.md)
-    - [常用算法](/algorithm/summary.md)
+    - [经典算法](/algorithm/summary.md)
 
 - Language | Go
     - [基础总结](go/go.md)

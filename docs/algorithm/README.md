@@ -4,7 +4,7 @@
 - [Stack 栈](/algorithm/stack.md)
 - [排序](/algorithm/sort.md)
 - [BST 二叉搜索树](/algorithm/bst.md)
-- [常用算法](/algorithm/summary.md)
+- [经典算法](/algorithm/summary.md)
 
 
 ## 常见复杂度有哪些？

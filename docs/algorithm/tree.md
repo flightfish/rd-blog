@@ -268,7 +268,7 @@ var_dump($bst->postorderTraversal($a));
 
 
 ```
-### 层次遍历
+### 4 层次遍历
 ```php
 <?php
 class Node {

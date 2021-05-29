@@ -4,6 +4,7 @@
 - [Stack 栈](/algorithm/stack.md)
 - [排序](/algorithm/sort.md)
 - [BST 二叉搜索树](/algorithm/bst.md)
+- [graph  图](/algorithm/graph.md)
 - [经典算法](/algorithm/summary.md)
 
 

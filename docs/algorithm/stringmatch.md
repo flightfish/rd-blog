@@ -19,3 +19,5 @@ BF 算法中的 BF 是 Brute Force 的缩写，中文叫作暴力匹配算法，
 
 ##好后缀规则（good suffix shift）
 
+##KMP
+

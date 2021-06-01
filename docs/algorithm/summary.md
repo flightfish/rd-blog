@@ -1,11 +1,12 @@
 # 经典算法
 # Dijkstra算法
 
-[399. 除法求值](https://leetcode-cn.com/problems/evaluate-division/)
-[最短路径模板+解析——（FLoyd算法）](https://blog.csdn.net/ytuyzh/article/details/88617987)
+# FLoyd算法
+- [399. 除法求值](https://leetcode-cn.com/problems/evaluate-division/)
+- [最短路径模板+解析——（FLoyd算法）](https://blog.csdn.net/ytuyzh/article/details/88617987)
 
 # 求余问题
-[剑指 Offer 14- II. 剪绳子 II](https://leetcode-cn.com/problems/jian-sheng-zi-ii-lcof/)
+- [剑指 Offer 14- II. 剪绳子 II](https://leetcode-cn.com/problems/jian-sheng-zi-ii-lcof/)
 
 大数求余解法
 - 大数越界： 当 a 增大时，最后返回的 3^a大小以指数级别增长，可能超出 int32 甚至 int64 的取值范围，导致返回值错误。
@@ -44,8 +45,8 @@ func remainder(x, a, p int) int {
 ```
 
 # 离散化树状数组
-[315. 计算右侧小于当前元素的个数](https://leetcode-cn.com/problems/count-of-smaller-numbers-after-self/)
-[剑指 Offer 51. 数组中的逆序对](https://leetcode-cn.com/problems/shu-zu-zhong-de-ni-xu-dui-lcof/submissions)
+- [315. 计算右侧小于当前元素的个数](https://leetcode-cn.com/problems/count-of-smaller-numbers-after-self/)
+- [剑指 Offer 51. 数组中的逆序对](https://leetcode-cn.com/problems/shu-zu-zhong-de-ni-xu-dui-lcof/submissions)
 
 # 背包问题
 ## 01 背包问题：
@@ -66,11 +67,11 @@ func remainder(x, a, p int) int {
 
 ## 例题
 #### 01 背包问题：
-[416. 分割等和子集](https://leetcode-cn.com/problems/partition-equal-subset-sum/)
-[494. 目标和](https://leetcode-cn.com/problems/target-sum/)
+- [416. 分割等和子集](https://leetcode-cn.com/problems/partition-equal-subset-sum/)
+- [494. 目标和](https://leetcode-cn.com/problems/target-sum/)
 #### 完全背包问题
-[139. 单词拆分](https://leetcode-cn.com/problems/word-break/)
-[279. 完全平方数](https://leetcode-cn.com/problems/perfect-squares/)
+- [139. 单词拆分](https://leetcode-cn.com/problems/word-break/)
+- [279. 完全平方数](https://leetcode-cn.com/problems/perfect-squares/)
 
 
 # 卡塔兰数

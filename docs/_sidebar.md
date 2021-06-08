@@ -21,7 +21,8 @@
     
 - DataBase | Mysql
     - [基础总结](database/mysql.md)
-    - [基础总结](database/mysql-lock.md)
+    - [MVCC](database/mysql-mvcc.md)
+    - [锁](database/mysql-lock.md)
 
 - DataBase | Redis
     - [基础总结](/database/redis.md)

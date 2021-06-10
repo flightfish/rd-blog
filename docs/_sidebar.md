@@ -22,7 +22,11 @@
 - DataBase | Mysql
     - [基础总结](database/mysql.md)
     - [字符集和比较规则](database/mysql-charset.md)
-    - [innodb](database/mysql-innodb.md)    
+    - [innodb](database/mysql-innodb.md)   
+    - [b+树](database/mysql-b+.md)  
+    - [单表访问](database/mysql-select.md)  
+    - [两表连接](database/mysql-join.md)  
+    - [explain](database/mysql-explain.md)  
     - [事务](database/mysql-mvcc.md)
     - [redo log](database/mysql-redo.md)
     - [MVCC](database/mysql-mvcc.md)

@@ -1,5 +1,14 @@
 # mysql
 
+# 客户端与服务器连接的过程
+- TCP/IP
+- 命名管道和共享内存
+- Unix域套接字文件
+
+![服务器处理客户端请求](./img/mysql_connection.png)
+
+
+
 ## 优化
 ### MySQL的limit用法和分页查询的性能分析及优化
 ```mysql

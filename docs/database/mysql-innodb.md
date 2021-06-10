@@ -1,5 +1,6 @@
 # innodb
 
+
 # InnoDB记录存储结构
 InnoDB是MySQL默认的存储引擎，InnoDB是一个将表中的数据存储到磁盘上的存储引擎
 <font color="red">InnoDB采取的方式是：将数据划分为若干个页，以页作为磁盘和内存之间交互的基本单位，InnoDB中页的大小一般为 <font  color=grep>16 KB</font></font>
@@ -69,16 +70,21 @@ mysql>
 | <font color="red" size=1>heap_no</font>  |  <font color="red"  size=1>13</font> |表示当前记录在记录堆的位置信息|
 | <font color="red" size=1>record_type</font>  |  <font color="red"  size=1>3</font> | 表示当前记录的类型， <font color="red" size=1>0</font> 表示普通记录,<font color="red" size=1>1</font>  表示B+树非叶子节点记录，<font color="red" size=1>2</font> 表示最小记录，<font color="red" size=1>3</font> 表示最大记录|
 | <font color="red" size=1>next_record</font>  |  <font color="red"  size=1>16</font> | 表示下一条记录的相对位置|
+
 ![!\[](https://img-blog.csdnimg.cn/20200613192207296.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTg2MjMwOA==,size_16,color_FFFFFF,t_70)
+
 MySQL会为每个记录默认的添加一些列（也称为隐藏列），
+
 | 列名 | 是否必须      | 占用空间      |描述
 |:------------:| :-------------:| :-------------:|  :-------------:|
 | <font color="red" size=1>row_id</font>  | 否| <font color="red"  size=1>6</font>字节 | 行ID，唯一标识一条记录|
 | <font color="red" size=1>transaction_id</font>  | 是|  <font color="red"  size=1>6</font>字节 | 事务ID|
 | <font color="red" size=1>roll_pointer</font>  | 是|  <font color="red"  size=1>7</font>字节 | 回滚指针|
+
 >这里需要提一下InnoDB表对主键的生成策略：优先使用用户自定义主键作为主键，如果用户没有定义主键，则选取一个Unique键作为主键，如果表中连Unique键都没有定义的话，则InnoDB会为表默认添加一个名为row_id的隐藏列作为主键。所以我们从上表中可以看出：<font color="red">InnoDB存储引擎会为每条记录都添加 ***transaction_id 和 roll_pointer*** 这两个列，但是 row_id 是可选的（在没有自定义主键以及Unique键的情况下才会添加该列）</font>。这些隐藏列的值不用我们操心，InnoDB存储引擎会自己帮我们生成的。
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200616175349564.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTg2MjMwOA==,size_16,color_FFFFFF,t_70)
+
 >看这个图的时候我们需要注意几点：
  >- 表record_format_demo使用的是ascii字符集，所以0x61616161就表示字符串'aaaa'，0x626262就表示字符串'bbb'，以此类推。
 > - 注意第1条记录中c3列的值，它是CHAR(10)类型的，它实际存储的字符串是：'cc'，而ascii字符集中的字节表示是'0x6363'，虽然表示这个字符串只占用了2个字节，但整个c3列仍然占用了10个字节的空间，除真实数据以外的8个字节的统统都用<font color="red">空格字符</font>填充，空格字符在ascii字符集的表示就是0x20。
@@ -87,17 +93,21 @@ MySQL会为每个记录默认的添加一些列（也称为隐藏列），
 
 ### Redundant行格式
 其实知道了Compact行格式之后，其他的行格式就是依葫芦画瓢了。我们现在要介绍的Redundant行格式是MySQL5.0之前用的一种行格式。
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200616193435730.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTg2MjMwOA==,size_16,color_FFFFFF,t_70)
 
 ### CHAR(M)列的存储格式
 <font color="red">ascii字符集一个定长字符集</font>，也就是说表示一个字符采用固定的一个字节，如果采用变长的字符集（也就是表示一个字符需要的字节数不确定，比如<font color="red">gbk表示一个字符要1～2个字节、utf8表示一个字符要1~3个字节等）</font>的话，c3列的长度也会被存储到变长字段长度列表中：
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200616180042588.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTg2MjMwOA==,size_16,color_FFFFFF,t_70)
 ### 行溢出数据
 #### VARCHAR(M)最多能存储的数据
 >如果VARCHAR(M)类型的列使用的不是ascii字符集，那M的最大取值取决于该字符集表示一个字符最多需要的字节数。在列的值允许为NULL的情况下，gbk字符集表示一个字符最多需要2个字节，那在该字符集下，M的最大取值就是32766（也就是：65532/2），也就是说最多能存储32766个字符；utf8字符集表示一个字符最多需要3个字节，那在该字符集下，M的最大取值就是21844，就是说最多能存储21844（也就是：65532/3）个字符
 #### 记录中的数据太多产生的溢出
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200613192053131.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTg2MjMwOA==,size_16,color_FFFFFF,t_70)
 从图中可以看出来，对于Compact和Redundant行格式来说，如果某一列中的数据非常多的话，在本记录的真实数据处只会存储该列的前<font color="red">**768**</font>个字节的数据和一个指向其他页的地址，然后把剩下的数据存放到其他页中，这个过程也叫做<font color="red">**行溢出**</font>，存储超出768字节的那些页面也被称为<font color="red">**行溢页**</font>。画一个简图就是这样：
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200613192039434.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTg2MjMwOA==,size_16,color_FFFFFF,t_70)
 <font color="red">***不只是 VARCHAR(M) 类型的列，其他的 TEXT、BLOB 类型的列在存储数据非常多的时候也会发生行溢出***</font>
 
@@ -124,6 +134,7 @@ MySQL会为每个记录默认的添加一些列（也称为隐藏列），
 存放undo日志信息的页
 <font color="red">存放记录(数据)的页为索引（INDEX）（数据）页</font>
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200616195427982.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTg2MjMwOA==,size_16,color_FFFFFF,t_70)
+
 | 名称 | 中文名      | 占用空间大小     |简单描述      |
 |:------------:| :-------------:| :-------------:|:-------------:|
 | <font color="red" size=1>File Header</font>  |文件头部 | <font color="red"  size=1>38</font>字节 | 页的一些通用信息|
@@ -214,6 +225,7 @@ Records: 4  Duplicates: 0  Warnings: 0
 >- <font color="red">**通过记录的next_record属性遍历该槽所在的组中的各个记录。**</font>
 ## Page Header（页面头部）
 <font color="red">这个部分占用固定的56个字节</font>
+
 | 名称 | 大小（单位：bit）      | 描述      |
 |:------------:| :-------------:| :-------------:|
 | <font color="red" size=1>PAGE_N_DIR_SLOTS</font>  |  <font color="red"  size=1>2</font> |在页目录中的槽数量|
@@ -238,6 +250,7 @@ Records: 4  Duplicates: 0  Warnings: 0
 
 ## File Header（文件头部）
 File Header针对各种类型的页都通用，也就是说不同类型的页都会以File Header作为第一个组成部分， <font color="red" >它描述了一些针对各种页都通用的一些信息， 这个部分占用固定的38个字节</font>，是由下边这些内容组成的：
+
 | 名称 | 大小（单位：bit）      | 描述      |
 |:------------:| :-------------:| :-------------:|
 | <font color="red" size=1>FIL_PAGE_SPACE_OR_CHKSUM</font>  |  <font color="red"  size=1>4</font> |页的校验和（checksum值）|
@@ -276,10 +289,60 @@ File Header针对各种类型的页都通用，也就是说不同类型的页都
 - <font color="red" >FIL_PAGE_PREV和FIL_PAGE_NEXT</font>
 <font color="red" >**并不是所有类型的页都有上一个和下一个页的属性**</font>，不过我们本集中唠叨的数据页（也就是类型为FIL_PAGE_INDEX的页）是有这两个属性的，所以<font color="red" >**所有的数据页其实是一个双链表**</font>
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200616220340273.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTg2MjMwOA==,size_16,color_FFFFFF,t_70)
+
 ## File Trailer
 >为了检测一个页是否完整（也就是在同步的时候有没有发生只同步一半的尴尬情况），设计InnoDB的在每个页的尾部都加了一个File Trailer部分，这个部分由8个字节组成，可以分成2个小部分：
 - 前4个字节代表页的校验和
 	这个部分是和File Header中的校验和相对应的。每当一个页面在内存中修改了，在同步之前就要把它的校验和算出来，因为File Header在页面的前边，所以校验和会被首先同步到磁盘，当完全写完时，校验和也会被写到页的尾部，如果完全同步成功，则页的首部和尾部的校验和应该是一致的。如果写了一半儿断电了，那么在File Header中的校验和就代表着已经修改过的页，而在File Trailer中的校验和代表着原先的页，二者不同则意味着同步中间出了错。
 
 - 后4个字节代表页面被最后修改时对应的日志序列位置（LSN）
-<font color="red" >这个File Trailer与File Header类似，都是所有类型的页通用的。</font>
+这个File Trailer与File Header类似，都是所有类型的页通用的。
+
+## 总结
+
+1、页是MySQL中磁盘和内存交互的基本单位，也是MySQL是管理存储空间的基本单位。
+
+2、指定和修改行格式的语法如下：
+```sql
+CREATE TABLE 表名 (列的信息) ROW_FORMAT=行格式名称
+
+ALTER TABLE 表名 ROW_FORMAT=行格式名称
+```
+
+3、InnoDB目前定义了4种行格式
+- COMPACT行格式
+- Redundant行格式
+- Dynamic行格式
+
+>这两种行格式类似于COMPACT行格式，只不过在处理行溢出数据时有点儿分歧，它们不会在记录的真实数据处存储字符串的前768个字节，而是把所有的字节都存储到其他页面中，只在记录的真实数据处存储其他页面的地址。
+
+- Compressed行格式
+
+> Compressed行格式会采用压缩算法对页面进行压缩
+
+4、一个页一般是16KB，当记录中的数据太多，当前页放不下的时候，会把多余的数据存储到其他页中，这种现象称为行溢出
+
+
+5、InnoDB为了不同的目的而设计了不同类型的页，我们把用于存放记录的页叫做数据页。
+
+6、一个数据页可以被大致划分为7个部分，分别是
+
+- File Header，表示页的一些通用信息，占固定的38字节。
+- Page Header，表示数据页专有的一些信息，占固定的56个字节。
+- Infimum + Supremum，两个虚拟的伪记录，分别表示页中的最小和最大记录，占固定的26个字节。
+- User Records：真实存储我们插入的记录的部分，大小不固定。
+- Free Space：页中尚未使用的部分，大小不确定。
+- Page Directory：页中的某些记录相对位置，也就是各个槽在页面中的地址偏移量，大小不固定，插入的记录越多，这个部分占用的空间越多。
+- File Trailer：用于检验页是否完整的部分，占用固定的8个字节。
+
+7、 每个记录的头信息中都有一个next_record属性，从而使页中的所有记录串联成一个单链表。
+
+8、InnoDB会把页中的记录划分为若干个组，每个组的最后一个记录的地址偏移量作为一个槽，存放在Page Directory中，所以在一个页中根据主键查找记录是非常快的，分为两步：
+
+   - 通过二分法确定该记录所在的槽。
+
+   - 通过记录的next_record属性遍历该槽所在的组中的各个记录。
+
+9、每个数据页的File Header部分都有上一个和下一个页的编号，所以所有的数据页会组成一个双链表。
+
+10、为保证从内存中同步到磁盘的页的完整性，在页的首部和尾部都会存储页中数据的校验和和页面最后修改时对应的LSN值，如果首部和尾部的校验和和LSN值校验不成功的话，就说明同步过程出现了问题。

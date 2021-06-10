@@ -1,4 +1,6 @@
 # 字符集和比较规则
+
+
 # 一些重要的字符集
 
  ## ASCII字符集(1字节)
@@ -88,10 +90,7 @@ CREATE TABLE 表名(
 ALTER TABLE 表名 MODIFY 列名 字符串类型 [CHARACTER SET 字符集名称] [COLLATE 比较规则名称];
 ```
 
-
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210325211419974.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTg2MjMwOA==,size_16,color_FFFFFF,t_70)
-
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20210325211419974.png)
 
 
 

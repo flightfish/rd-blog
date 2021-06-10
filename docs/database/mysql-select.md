@@ -1,3 +1,4 @@
+
 ```sql
 //eg single_table表建立了1个聚簇索引和4个二级索引
 CREATE TABLE single_table (

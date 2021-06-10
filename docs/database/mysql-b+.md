@@ -359,7 +359,7 @@ WHERE my_col < 4/2//my_col单独列  存储引擎使用B+树
 
 <font color="red">**页面分裂和记录移位意味着：性能损耗**</font>
 
-所以我们建议：<font color="red">**让主键具有AUTO_INCREMENT**</font>，让存储引擎自己为表生成主键，而不是我们手动插入 。
+所以我们建议：让主键具有AUTO_INCREMENT，让存储引擎自己为表生成主键，而不是我们手动插入 。
 
 ### 冗余和重复索引
 

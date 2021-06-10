@@ -228,20 +228,20 @@ Records: 4  Duplicates: 0  Warnings: 0
 
 | 名称 | 大小（单位：bit）      | 描述      |
 |:------------:| :-------------:| :-------------:|
-| <font color="red" size=1>PAGE_N_DIR_SLOTS</font>  |  <font color="red"  size=1>2</font> |在页目录中的槽数量|
-| <font color="red" size=1>PAGE_HEAP_TOP</font>  |  <font color="red"  size=1>2</font> | 还未使用的空间最小地址，也就是说从该地址之后就是<font color="red" size=1>Free Space</font>|
-| <font color="red" size=1>PAGE_N_HEAP</font>  |  <font color="red"  size=1>2</font> |本页中的记录的数量（包括最小和最大记录以及标记为删除的记录）|
-| <font color="red" size=1>PAGE_FREE</font>  |  <font color="red"  size=1>2</font> | 第一个已经标记为删除的记录地址（各个已删除的记录通过 <font color="red"  size=1>next_record</font> 也会组成一个单链表，这个单链表中的记录可以被重新利用）|
-| <font color="red" size=1>PAGE_GARBAGE</font>  |  <font color="red"  size=1>2</font> | 已删除记录占用的字节数|
-| <font color="red" size=1>PAGE_LAST_INSERT</font>  |  <font color="red"  size=1>2</font> |最后插入记录的位置|
-| <font color="red" size=1>PAGE_DIRECTION</font>  |  <font color="red"  size=1>2</font> | 记录插入的方向|
-| <font color="red" size=1>PAGE_N_RECS</font>  |  <font color="red"  size=1>2</font> | 一个方向连续插入的记录数量|
-| <font color="red" size=1>PAGE_N_DIRECTION</font>  |  <font color="red"  size=1>2</font> | 该页中记录的数量（不包括最小和最大记录以及被标记为删除的记录）|
-| <font color="red" size=1>PAGE_MAX_TRX_ID</font>  |  <font color="red"  size=1>8</font> | 修改当前页的最大事务ID，该值仅在二级索引中定义|
-| <font color="red" size=1>PAGE_LEVEL</font>  |  <font color="red"  size=1>2</font> | 当前页在B+树中所处的层级|
-| <font color="red" size=1>PAGE_INDEX_ID</font>  |  <font color="red"  size=1>8</font> | 索引ID，表示当前页属于哪个索引|
-| <font color="red" size=1>PAGE_BTR_SEG_LEAF</font>  |  <font color="red"  size=1>10</font> | B+树叶子段的头部信息，仅在B+树的Root页定义|
-| <font color="red" size=1>PAGE_BTR_SEG_TOP</font>  |  <font color="red"  size=1>10</font> | B+树非叶子段的头部信息，仅在B+树的Root页定义|
+| PAGE_N_DIR_SLOTS  |  2 |在页目录中的槽数量|
+| PAGE_HEAP_TOP  |  2 | 还未使用的空间最小地址，也就是说从该地址之后就是Free Space</font>|
+| PAGE_N_HEAP  |  2 |本页中的记录的数量（包括最小和最大记录以及标记为删除的记录）|
+| PAGE_FREE  |  2 | 第一个已经标记为删除的记录地址（各个已删除的记录通过 <font color="red"  size=1>next_record</font> 也会组成一个单链表，这个单链表中的记录可以被重新利用）|
+| PAGE_GARBAGE |  2| 已删除记录占用的字节数|
+| PAGE_LAST_INSERT |  2|最后插入记录的位置|
+| PAGE_DIRECTION |  2| 记录插入的方向|
+| PAGE_N_RECS |  2| 一个方向连续插入的记录数量|
+| PAGE_N_DIRECTION |  2| 该页中记录的数量（不包括最小和最大记录以及被标记为删除的记录）|
+| PAGE_MAX_TRX_ID |  8| 修改当前页的最大事务ID，该值仅在二级索引中定义|
+| PAGE_LEVEL |  2| 当前页在B+树中所处的层级|
+| PAGE_INDEX_ID |  8| 索引ID，表示当前页属于哪个索引|
+| PAGE_BTR_SEG_LEAF |  10| B+树叶子段的头部信息，仅在B+树的Root页定义|
+| PAGE_BTR_SEG_TOP |  10| B+树非叶子段的头部信息，仅在B+树的Root页定义|
 
 >- <font color="red" >PAGE_DIRECTION</font>
 假如新插入的一条记录的主键值比上一条记录的主键值大，我们说这条记录的插入方向是右边，反之则是左边。用来表示最后一条记录插入方向的状态就是PAGE_DIRECTION。
@@ -253,14 +253,14 @@ File Header针对各种类型的页都通用，也就是说不同类型的页都
 
 | 名称 | 大小（单位：bit）      | 描述      |
 |:------------:| :-------------:| :-------------:|
-| <font color="red" size=1>FIL_PAGE_SPACE_OR_CHKSUM</font>  |  <font color="red"  size=1>4</font> |页的校验和（checksum值）|
-| <font color="red" size=1>FIL_PAGE_OFFSET</font>  |  <font color="red"  size=1>4</font> | 页号|
-| <font color="red" size=1>FIL_PAGE_PREV</font>  |  <font color="red"  size=1>4</font> |上一个页的页号|
-| <font color="red" size=1>FIL_PAGE_NEXT</font>  |  <font color="red"  size=1>4</font> | 下一个页的页号|
-| <font color="red" size=1>FIL_PAGE_LSN</font>  |  <font color="red"  size=1>8</font> | 页面被最后修改时对应的日志序列位置（英文名是：Log Sequence Number）|
-| <font color="red" size=1>FIL_PAGE_TYPE</font>  |  <font color="red"  size=1>2</font> |该页的类型|
-| <font color="red" size=1>FIL_PAGE_FILE_FLUSH_LSN</font>  |  <font color="red"  size=1>8</font> | 	仅在系统表空间的一个页中定义，代表文件至少被刷新到了对应的LSN值|
-| <font color="red" size=1>FIL_PAGE_ARCH_LOG_NO_OR_SPACE_ID</font>  |  <font color="red"  size=1>4</font> |页属于哪个表空间|
+| FIL_PAGE_SPACE_OR_CHKSUM |  4|页的校验和（checksum值）|
+| FIL_PAGE_OFFSET |  4| 页号|
+| FIL_PAGE_PREV |  4|上一个页的页号|
+| FIL_PAGE_NEXT |  4| 下一个页的页号|
+| FIL_PAGE_LSN |  8| 页面被最后修改时对应的日志序列位置（英文名是：Log Sequence Number）|
+| FIL_PAGE_TYPE |  2|该页的类型|
+| FIL_PAGE_FILE_FLUSH_LSN |  8| 	仅在系统表空间的一个页中定义，代表文件至少被刷新到了对应的LSN值|
+| FIL_PAGE_ARCH_LOG_NO_OR_SPACE_ID |  4|页属于哪个表空间|
 对照着这个表格，我们看几个目前比较重要的部分：
 - <font color="red" >FIL_PAGE_SPACE_OR_CHKSUM</font>
 
@@ -275,17 +275,18 @@ File Header针对各种类型的页都通用，也就是说不同类型的页都
 
 | 类型名称 | 十六进制      | 描述      |
 |:------------:| :-------------:| :-------------:|
-| <font color="red" size=1>FIL_PAGE_TYPE_ALLOCATED</font>  |  0x0000|最新分配，还没使用|
-| <font color="red" size=1>FIL_PAGE_UNDO_LOG</font>  |  0x0002|Undo日志页|
-| <font color="red" size=1>FIL_PAGE_INODE</font>  |  0x0003|段信息节点|
-| <font color="red" size=1>FIL_PAGE_IBUF_FREE_LIST</font>  |  0x0004|insert Buffer空闲列表|
-| <font color="red" size=1>FIL_PAGE_TYPE_SYS</font>  |  0x0006|系统页|
-| <font color="red" size=1>FIL_PAGE_UNDO_LOG</font>  |  0x0002|Undo日志页|
-| <font color="red" size=1>FIL_PAGE_TYPE_TRX_SYS</font>  |  0x0007|事务系统数据|
-| <font color="red" size=1>FIL_PAGE_TYPE_FSP_HDR</font>  |  0x0008	|表空间头部信息|
-| <font color="red" size=1>FIL_PAGE_TYPE_XDES</font>  | 0x0009|扩展描述页|
-| <font color="red" size=1>FIL_PAGE_TYPE_BLOB</font>  |  0x000A|溢出页|
-| <font color="red" size=1>FIL_PAGE_INDEX</font>  | 0x45BF	|索引页，也就是我们所说的<font color="red" >数据页</font>|
+| FIL_PAGE_TYPE_ALLOCATED |  0x0000|最新分配，还没使用|
+| FIL_PAGE_UNDO_LOG |  0x0002|Undo日志页|
+| FIL_PAGE_INODE |  0x0003|段信息节点|
+| FIL_PAGE_IBUF_FREE_LIST |  0x0004|insert Buffer空闲列表|
+| FIL_PAGE_TYPE_SYS |  0x0006|系统页|
+| FIL_PAGE_UNDO_LOG |  0x0002|Undo日志页|
+| FIL_PAGE_TYPE_TRX_SYS |  0x0007|事务系统数据|
+| FIL_PAGE_TYPE_FSP_HDR |  0x0008	|表空间头部信息|
+| FIL_PAGE_TYPE_XDES | 0x0009|扩展描述页|
+| FIL_PAGE_TYPE_BLOB |  0x000A|溢出页|
+| FIL_PAGE_INDEX | 0x45BF	|索引页，也就是我们所说的<font color="red" >数据页</font>|
+
 - <font color="red" >FIL_PAGE_PREV和FIL_PAGE_NEXT</font>
 <font color="red" >**并不是所有类型的页都有上一个和下一个页的属性**</font>，不过我们本集中唠叨的数据页（也就是类型为FIL_PAGE_INDEX的页）是有这两个属性的，所以<font color="red" >**所有的数据页其实是一个双链表**</font>
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200616220340273.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTg2MjMwOA==,size_16,color_FFFFFF,t_70)

@@ -81,6 +81,7 @@ utf8_general_ci是一种通用的比较规则
 ```
 
 - 列级别
+
 ```mysql
 CREATE TABLE 表名(
     列名 字符串类型 [CHARACTER SET 字符集名称] [COLLATE 比较规则名称],
@@ -89,6 +90,7 @@ CREATE TABLE 表名(
 
 ALTER TABLE 表名 MODIFY 列名 字符串类型 [CHARACTER SET 字符集名称] [COLLATE 比较规则名称];
 ```
+
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210325211419974.png)
 

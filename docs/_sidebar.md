@@ -21,6 +21,10 @@
     
 - DataBase | Mysql
     - [基础总结](database/mysql.md)
+    - [字符集和比较规则](database/mysql-charset.md)
+    - [innodb](database/mysql-innodb.md)    
+    - [事务](database/mysql-mvcc.md)
+    - [redo log](database/mysql-redo.md)
     - [MVCC](database/mysql-mvcc.md)
     - [锁](database/mysql-lock.md)
 

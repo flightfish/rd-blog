@@ -305,7 +305,8 @@ SELECT name, birthday, phone_number, COUNT(*) FROM person_info GROUP BY name, bi
 
 ### 覆盖索引
 为了彻底告别回表操作带来的性能损耗，我们建议：<font color="red">**最好在查询列表里只包含索引列**</font>。覆盖索引不需要回表。
-<font color="red">**我们很不鼓励用*号作为查询列表，最好把我们需要查询的列依次标明**</font>
+
+<font color="red">*我们很不鼓励用号作为查询列表，最好把我们需要查询的列依次标明**</font>
 ## 如何挑选索引
 ### 只为用于搜索、排序或分组的列创建索引
 >WHERE子句中的列、连接子句中的连接列，或者出现在ORDER BY或GROUP BY子句中的列创建索引
@@ -329,25 +330,37 @@ CREATE TABLE person_info(
 );   
 ```
 name(10)就表示在建立的B+树索引中只保留记录的前10个字符的编码，这种<font color="red">只索引字符串值的前缀的策略是我们非常鼓励的，尤其是在字符串类型能存储的字符比较多的时候</font>。
+
 ### 索引列前缀对排序的影响
+
 ```sql
 SELECT * FROM person_info ORDER BY name LIMIT 10;
 ```
 >因为二级索引中不包含完整的name列信息，所以无法对前十个字符相同，后边的字符不同的记录进行排序，也就是使用索引列前缀的方式无法支持使用索引排序，只好乖乖的用文件排序喽
+
 ### 让索引列在比较表达式中单独出现
+
 <font color="red">**如果索引列在比较表达式中不是以单独列的形式出现，而是以某个表达式，或者函数调用形式出现的话，是用不到索引的。**</font>
 
 ```sql
 WHERE my_col * 2 < 4//my_col不是单独列 存储引擎会依次遍历所有的记录
 WHERE my_col < 4/2//my_col单独列  存储引擎使用B+树
 ```
+
 ### 主键插入顺序
+
 假设某个数据页存储的记录已经满了，它存储的主键值在1~100之间：
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200617170134574.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTg2MjMwOA==,size_16,color_FFFFFF,t_70)
+
 如果此时再插入一条主键值为9的记录，那它插入的位置就如下图：
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200617170152672.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTg2MjMwOA==,size_16,color_FFFFFF,t_70)
+
 <font color="red">**页面分裂和记录移位意味着：性能损耗**</font>
+
 所以我们建议：<font color="red">**让主键具有AUTO_INCREMENT**</font>，让存储引擎自己为表生成主键，而不是我们手动插入 。
+
 ### 冗余和重复索引
 
 ```sql
@@ -362,3 +375,25 @@ CREATE TABLE person_info(
     KEY idx_name (name(10))
 );   
 ```
+
+# 总结 
+- B+树索引在空间和时间上都有代价，所以没事儿别瞎建索引。
+
+- B+树索引适用于下边这些情况：
+
+    - 全值匹配
+    - 匹配左边的列
+    - 匹配范围值
+    - 精确匹配某一列并范围匹配另外一列
+    - 用于排序
+    - 用于分组
+- 在使用索引时需要注意下边这些事项：
+
+    - 只为用于搜索、排序或分组的列创建索引
+    - 为列的基数大的列创建索引
+    - 索引列的类型尽量小
+    - 可以只对字符串值的前缀建立索引
+    - 只有索引列在比较表达式中单独出现才可以适用索引
+    - 为了尽可能少的让聚簇索引发生页面分裂和记录移位的情况，建议让主键拥有AUTO_INCREMENT属性。
+    - 定位并删除表中的重复和冗余索引
+    - 尽量使用覆盖索引进行查询，避免回表带来的性能损耗。

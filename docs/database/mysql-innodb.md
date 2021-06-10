@@ -288,7 +288,8 @@ File Header针对各种类型的页都通用，也就是说不同类型的页都
 | FIL_PAGE_INDEX | 0x45BF	|索引页，也就是我们所说的<font color="red" >数据页</font>|
 
 - <font color="red" >FIL_PAGE_PREV和FIL_PAGE_NEXT</font>
-<font color="red" >**并不是所有类型的页都有上一个和下一个页的属性**</font>，不过我们本集中唠叨的数据页（也就是类型为FIL_PAGE_INDEX的页）是有这两个属性的，所以<font color="red" >**所有的数据页其实是一个双链表**</font>
+
+**并不是所有类型的页都有上一个和下一个页的属性**，不过我们本集中唠叨的数据页（也就是类型为FIL_PAGE_INDEX的页）是有这两个属性的，所以**所有的数据页其实是一个双链表**
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200616220340273.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTg2MjMwOA==,size_16,color_FFFFFF,t_70)
 
 ## File Trailer

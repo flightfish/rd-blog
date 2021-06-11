@@ -117,7 +117,7 @@ switched to db demo
 
 ## MongoDB Nodejs 客户端驱动
 
-官方提供的 Node.js 客户端驱动支持 Callback 和 Promise 两种方式与 MongoDB 交互，API 文档参考 [https://mongodb.github.io/node-mongodb-native/](https://mongodb.github.io/node-mongodb-native/)
+官方提供的  客户端驱动支持 Callback 和 Promise 两种方式与 MongoDB 交互，API 文档参考 [https://mongodb.github.io/node-mongodb-native/](https://mongodb.github.io/node-mongodb-native/)
 
 ### 安装驱动程序依赖
 

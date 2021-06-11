@@ -275,7 +275,7 @@ async function consumer() {
 consumer();
 ```
 
-**Node.js 示例代码**
+** 示例代码**
 
 ```
 源码地址如下：

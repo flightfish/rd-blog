@@ -19,7 +19,7 @@ RocksDB 是 FaceBook 开放的一种嵌入式、持久化存储、KV型且非常
 
 * CouchDB
 
-CouchDB 是用 Erlang 开发的面向文档的数据库系统，具有高度可用性与可伸缩性，可通过 RESTful API 访问。也许你会对这个名字比较陌生，做为 Node.js 同学每天都在用的 NPM 背后就是使用的 CouchDB。[CouchDB](http://couchdb.apache.org/)
+CouchDB 是用 Erlang 开发的面向文档的数据库系统，具有高度可用性与可伸缩性，可通过 RESTful API 访问。也许你会对这个名字比较陌生，做为  同学每天都在用的 NPM 背后就是使用的 CouchDB。[CouchDB](http://couchdb.apache.org/)
 
 ## Relational
 

@@ -205,7 +205,7 @@ db.order.insert({"id": "123456789"}, {writeConern: {w: "majority"}})
 db.order.find({"id": "123456789"}).readPref("secondaryPreferred").readConcern("majority")
 ```
 
-本文是对 MogoDB 事务的一个初步了解，Read Concern/Write Concern/Read Preference 这些在后续事务实践中都会应用，希望大家可以事先进行一个了解，在接下来的一篇文章中，我会介绍 MongoDB 的事务应该如何应用，同时结合 Node.js 进行实践说明，欢迎关注！
+本文是对 MogoDB 事务的一个初步了解，Read Concern/Write Concern/Read Preference 这些在后续事务实践中都会应用，希望大家可以事先进行一个了解，在接下来的一篇文章中，我会介绍 MongoDB 的事务应该如何应用，同时结合  进行实践说明，欢迎关注！
 
 ## Reference
 

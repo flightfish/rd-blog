@@ -1,6 +1,6 @@
 # 利用 RabbitMQ 死信队列和 TTL 实现定时任务
 
-实际业务中对于定时任务的需求是不可避免的，例如，订单超时自动取消、每天定时拉取数据等，在 Node.js 中系统层面提供了 setTimeout、setInterval 两个 API 或通过 node-schedule 这种第三方库来实现。
+实际业务中对于定时任务的需求是不可避免的，例如，订单超时自动取消、每天定时拉取数据等，在  中系统层面提供了 setTimeout、setInterval 两个 API 或通过 node-schedule 这种第三方库来实现。
 
 通过这种方式实现对于简单的定时任务是 ok 的，过于复杂的、可用性要求较高的系统就会存在以下缺点。
 
@@ -41,9 +41,9 @@ RabbitMQ 本身是不支持的，可以通过它提供的两个特性 [Time-To-L
 
 **`注意`**：如果以上两种方式都做了设置，消息的 TTL 则以两者之中最小的那个为准。
 
-## 延迟队列实现 Node.js 版
+## 延迟队列实现  版
 
-推荐采用 [amqplib](https://github.com/squaremo/amqp.node) 库，一个 Node.js 实现的 RabbitMQ 客户端。
+推荐采用 [amqplib](https://github.com/squaremo/amqp.node) 库，一个  实现的 RabbitMQ 客户端。
 
 **初始化 RabbitMQ**
 
@@ -227,4 +227,4 @@ https://github.com/Q-Angelo/SpringBoot-Course/tree/master/chapter8/chapter8-1/sr
 
 ## 总结
 
-延迟队列在现实业务场景中，还是有很多实际用途的，订单的超时取消、重试等，都可以借助此来完成，通过本文希望你能掌握什么是延迟队列，在 RabbitMQ 中的实现主要是根据 TTL + 死信队列来完成的，本文最后采用了 Node.js 和 Java 分别进行了实践，希望能帮助到你。
+延迟队列在现实业务场景中，还是有很多实际用途的，订单的超时取消、重试等，都可以借助此来完成，通过本文希望你能掌握什么是延迟队列，在 RabbitMQ 中的实现主要是根据 TTL + 死信队列来完成的，本文最后采用了  和 Java 分别进行了实践，希望能帮助到你。

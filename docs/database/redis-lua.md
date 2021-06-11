@@ -1,4 +1,4 @@
-# Node.js 中实践 Redis Lua 脚本
+#  中实践 Redis Lua 脚本
 
 > 对别人的意见要表示尊重。千万别说："你错了。"——卡耐基
 
@@ -10,7 +10,7 @@ Lua 是一种轻量小巧的脚本语言，用标准 C 语言编写并以源代�
 
 Redis 支持两种运行 Lua 脚本的方式，一种是直接在 Redis 中输入 Lua 代码，适合于一些简单的脚本。另一种方式是编写 Lua 脚本文件，适合于有逻辑运算的情况，Redis 使用 SHA1 算法支持对脚本签名和 Script Load 预先缓存，需要运行的时候通过签名返回的标识符即可。
 
-下面会分别介绍如何应用 Redis 提供的 EVAL、EVALSHA 两个命令来实现对 Lua 脚本的应用，同时介绍一些在 Node.js 中该如何去应用 Redis 的 Lua 脚本。
+下面会分别介绍如何应用 Redis 提供的 EVAL、EVALSHA 两个命令来实现对 Lua 脚本的应用，同时介绍一些在  中该如何去应用 Redis 的 Lua 脚本。
 
 ## EVAL
 
@@ -69,7 +69,7 @@ EVAL "redis.pcall('SET_', KEYS[1], ARGV[2]); redis.pcall('SET', KEYS[2], ARGV[3]
 (nil)
 ```
 
-### EVAL 在 Node.js 中实现
+### EVAL 在  中实现
 
 [ioredis](https://github.com/luin/ioredis) 支持所有的脚本命令，比如 EVAL、EVALSHA 和 SCRIPT。但是，在现实场景中使用它是很繁琐的，因为开发人员必须注意脚本缓存，并检测何时使用 EVAL，何时使用 EVALSHA。ioredis 公开了一个 defineCommand 方法，使脚本更容易使用。
 
@@ -132,7 +132,7 @@ EVALSHA sha1 numkeys key [key ...] arg [arg ...]
 "val2"
 ```
 
-### EVALSHA 在 Node.js 中实现
+### EVALSHA 在  中实现
 
 分为三步：缓存脚本、执行脚本、获取数据
 
@@ -187,9 +187,9 @@ else
 end
 ```
 
-**Node.js 中加载 Lua 脚本文件**
+** 中加载 Lua 脚本文件**
 
-和上面 Node.js 中应用 Lua 差别不大，多了一步，通过 fs 模块先读取 Lua 脚本文件，在通过 eval 或者 evalsha 执行。
+和上面  中应用 Lua 差别不大，多了一步，通过 fs 模块先读取 Lua 脚本文件，在通过 eval 或者 evalsha 执行。
 
 ```js
 const Redis = require("ioredis");

@@ -222,7 +222,7 @@ cluster_known_nodes:6
 cluster_size:3
 ```
 
-## Cluster Node.js 客户端基本使用
+## Cluster  客户端基本使用
 
 ioredis 客户端支持 Cluster 模式，使用之前需要预先安装该包。
 

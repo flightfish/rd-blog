@@ -68,7 +68,7 @@ module.exports = {
 
 ## 消费端限流机制
 
-和正常建立消费端一样，要实现限流操作需要借助 prefetch 方法，这是 Rabbitmq 提供的服务质量保证 ( QOS) 功能，详细内容参见我的另一篇文章 [Node.js 结合 RabbitMQ 高级特性 Prefetch 实现消费端限流策略](https://mp.weixin.qq.com/s/Clq9DdFppirXQ98sf10qTQ)
+和正常建立消费端一样，要实现限流操作需要借助 prefetch 方法，这是 Rabbitmq 提供的服务质量保证 ( QOS) 功能，详细内容参见我的另一篇文章 [ 结合 RabbitMQ 高级特性 Prefetch 实现消费端限流策略](https://mp.weixin.qq.com/s/Clq9DdFppirXQ98sf10qTQ)
 
 ```js
 // consumer.js

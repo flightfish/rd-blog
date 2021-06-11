@@ -4,7 +4,7 @@
 
 Confirm 的另一个优点是它所处理的逻辑是异步的，生产者在发送一条消息之后可以进行异步监听通过回调来处理该消息，同时还可继续发送下一条，如果 RabbitMQ 因为系统内部错误导致消息丢失，回调会收到一条 nack 消息，用来处理失败的逻辑，否则会收到一条 ack 成功的消息。
 
-## Node.js 版实现
+##  版实现
 
 一个 channel 使用确认模式 “confirmation mode”，可参考官方文章 [http://www.squaremobius.net/amqp.node/channel_api.html#confirmchannel](http://www.squaremobius.net/amqp.node/channel_api.html#confirmchannel)
 

@@ -35,7 +35,7 @@ sentinel deny-scripts-reconfig yes
 
 在上节讲解的 Redis 主从复制一节，我们只用了一台机器，为了更好模拟生产环境，这里采用 3 台虚拟机进行实践，模拟故障转移。
 
-以下为我们搭建好的示意图，客户端（Node.js 服务）通过链接 Sentinel 与各个 Redis 主从节点交互。
+以下为我们搭建好的示意图，客户端（ 服务）通过链接 Sentinel 与各个 Redis 主从节点交互。
 
 ![](./img/redis_sentinel_demo_001.png)
 
@@ -229,11 +229,11 @@ sentinel_simulate_failure_flags:0
 master0:name=mymaster,status=ok,address=192.168.6.128:6379,slaves=2,sentinels=3
 ```
 
-至此 Sentinel 的服务端安装部署已经介绍完毕，接下来使用 Node.js 客户进行链接和故障转移演练实践
+至此 Sentinel 的服务端安装部署已经介绍完毕，接下来使用  客户进行链接和故障转移演练实践
 
 ## Nodejs客户端链接
 
-在看下客户端如何使用 Sentinel，这里以 Node.js 为例，客户端通过 Sentinel 发现主从节点地址，然后在通过这些地址建立相应的链接来进行数据存取操作，以下用的是 Node.js 的 ioredis 客户端，你需要先执行 ```npm install ioredis``` 命令进行安装
+在看下客户端如何使用 Sentinel，这里以  为例，客户端通过 Sentinel 发现主从节点地址，然后在通过这些地址建立相应的链接来进行数据存取操作，以下用的是  的 ioredis 客户端，你需要先执行 ```npm install ioredis``` 命令进行安装
 
 ```js
 const Redis = require('ioredis');
@@ -280,7 +280,7 @@ kill -9 5080
 
 **观察客户端日志**
 
-现在让我们在来看下上面写的 Node.js 客户端日志情况，如下所示：
+现在让我们在来看下上面写的  客户端日志情况，如下所示：
 
 ```bash
 k_1 1

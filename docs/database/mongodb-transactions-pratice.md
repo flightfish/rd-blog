@@ -54,7 +54,7 @@ session.abortTransaction();
 
 ## MongoDB 事务在 Nodejs 中的实践
 
-为了更好的理解 MongoDB 事务在 Node.js 中如何应用，列举一个例子进行说明。
+为了更好的理解 MongoDB 事务在  中如何应用，列举一个例子进行说明。
 
 假设我们现在有这样一个商城商品下单场景，分为一个商品表（存储商品数据、库存信息），另一个订单表（存储订单记录）。每次下单之前需要先校验库存是否大于 0，大于 0 的时候扣减商品库存、创建订单，否则，提示库存不足无法下单。
 
@@ -83,7 +83,7 @@ session.abortTransaction();
 // db.order_goods.insert({ id: "o10000", goodId: "g1000", price: 100 })
 ```
 
-### Node.js 操作 MongoDB 原生 API 实现
+###  操作 MongoDB 原生 API 实现
 
 **注意**：在一个事务操作中 readPreference 必须设置为 primary 节点，不能是 secondary 节点。
 

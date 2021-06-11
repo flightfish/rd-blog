@@ -1,12 +1,12 @@
-# Node.js 中实践 Redis 分布式锁
+#  中实践 Redis 分布式锁
 
 在一些分布式环境下、多线程并发编程中，如果对同一资源进行读写操作，避免不了的一个就是资源竞争问题，通过引入分布式锁这一概念，可以解决数据一致性问题。
 
 ## 认识线程、进程、分布式锁
 
-**线程锁**：单线程编程模式下请求是顺序的，一个好处是不需要考虑线程安全、资源竞争问题，因此当你进行 Node.js 编程时，也不会去考虑线程安全问题。那么多线程编程模式下，例如 Java 你可能很熟悉一个词 synchronized，通常也是 Java 中解决并发编程最简单的一种方式，synchronized 可以保证在同一时刻仅有一个线程去执行某个方法或某块代码。
+**线程锁**：单线程编程模式下请求是顺序的，一个好处是不需要考虑线程安全、资源竞争问题，因此当你进行  编程时，也不会去考虑线程安全问题。那么多线程编程模式下，例如 Java 你可能很熟悉一个词 synchronized，通常也是 Java 中解决并发编程最简单的一种方式，synchronized 可以保证在同一时刻仅有一个线程去执行某个方法或某块代码。
 
-**进程锁**：一个服务部署于一台服务器，同时开启多个进程，Node.js 编程中为了利用操作系统资源，根据 CPU 的核心数可以开启多进程模式，这个时候如果对一个共享资源操作还是会遇到资源竞争问题，另外每一个进程都是相互独立的，拥有自己独立的内存空间。关于进程锁通过 Java 中的 synchronized 也很难去解决，synchronized 仅局限于在同一个 JVM 中有效。
+**进程锁**：一个服务部署于一台服务器，同时开启多个进程， 编程中为了利用操作系统资源，根据 CPU 的核心数可以开启多进程模式，这个时候如果对一个共享资源操作还是会遇到资源竞争问题，另外每一个进程都是相互独立的，拥有自己独立的内存空间。关于进程锁通过 Java 中的 synchronized 也很难去解决，synchronized 仅局限于在同一个 JVM 中有效。
 
 **分布式锁**：一个服务无论是单线程还是多进程模式，当多机部署、处于分布式环境下对同一共享资源进行操作还是会面临同样的问题。此时就要去引入一个概念分布式锁。如下图所示，由于先读数据在通过业务逻辑修改之后进行 SET 操作，这并不是一个原子操作，当多个客户端对同一资源进行先读后写操作就会引发并发问题，这时就要引入分布式锁去解决，通常也是一个很广泛的解决方案。
 
@@ -24,7 +24,7 @@
 
 ## Redis 单实例分布式锁实现
 
-在 Redis 的单节点实例下实现一个简单的分布式锁，这里会借助一些简单的 Lua 脚本来实现原子性，不了解可以参考之前的文章 [Node.js 中实践 Redis Lua 脚本](https://mp.weixin.qq.com/s/kfgiVkKZofLh6qiqUd48Cw)
+在 Redis 的单节点实例下实现一个简单的分布式锁，这里会借助一些简单的 Lua 脚本来实现原子性，不了解可以参考之前的文章 [ 中实践 Redis Lua 脚本](https://mp.weixin.qq.com/s/kfgiVkKZofLh6qiqUd48Cw)
 
 ### 上锁
 
@@ -62,9 +62,9 @@ else
 end
 ```
 
-### Redis 单实例分布式锁 Node.js 实践
+### Redis 单实例分布式锁  实践
 
-使用 Node.js 的 Redis 客户端为 ioredis，npm install ioredis -S 先安装该包。
+使用  的 Redis 客户端为 ioredis，npm install ioredis -S 先安装该包。
 
 **初始化自定义 RedisLock**
 
@@ -230,7 +230,7 @@ https://github.com/Q-Angelo/project-training/tree/master/redis/lock/redislock.js
 
 ## Redlock 算法
 
-以上是使用 Node.js 对 Redis 分布式锁的一个简单实现，在单实例中是可用的，当我们对 Redis 节点做一个扩展，在 Sentinel、Redis Cluster 下会怎么样呢？
+以上是使用  对 Redis 分布式锁的一个简单实现，在单实例中是可用的，当我们对 Redis 节点做一个扩展，在 Sentinel、Redis Cluster 下会怎么样呢？
 
 以下是一个 Redis Sentinel 的故障自动转移示例图，假设我们客户端 A 在主节点 192.168.6.128 获取到锁之后，主节点还未来得及同步信息到从节点就挂掉了，这时候 Sentinel 会选举另外一个从节点做为主节点，那么客户端 B 此时也来申请相同的锁，就会出现同样一把锁被多个客户端持有，对数据的最终一致性有很高的要求还是不行的。
 
@@ -242,9 +242,9 @@ https://github.com/Q-Angelo/project-training/tree/master/redis/lock/redislock.js
 
 Redlock 在上述文档也有描述，这里简单做个总结：Redlock 在 Redis 单实例或多实例中提供了强有力的保障，本身具备容错能力，它会从 N 个实例使用相同的 key、随机值尝试 ```set key value [EX seconds] [PX milliseconds] [NX|XX]``` 命令去获取锁，在有效时间内至少 N/2+1 个 Redis 实例取到锁，此时就认为取锁成功，否则取锁失败，失败情况下客户端应该在所有的 Redis 实例上进行解锁。
 
-### Node.js 中应用 Redlock
+###  中应用 Redlock
 
-[github.com/mike-marcacci/node-redlock](github.com/mike-marcacci/node-redlock) 是 Node.js 版的 Redlock 实现，使用起来也很简单，开始之前先安装 ioredis、redlock 包。
+[github.com/mike-marcacci/node-redlock](github.com/mike-marcacci/node-redlock) 是  版的 Redlock 实现，使用起来也很简单，开始之前先安装 ioredis、redlock 包。
 
 ```
 npm i ioredis -S

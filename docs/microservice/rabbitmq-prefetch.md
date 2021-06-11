@@ -12,9 +12,9 @@ RabbitMQ 提供了服务质量保证 (`QOS`) 功能，对 channel（通道）预
 
 在 `RabbitMQ v3.3.0` 之后，放宽了限制，除了对 channel 设置之外，还可以对每个消费者进行设置。
 
-#### Node.js 版
+####  版
 
-以下为 Node.js 开发语言 amqplib 库对于限流实现提供的接口方法 prefetch
+以下为  开发语言 amqplib 库对于限流实现提供的接口方法 prefetch
 
 ```js
 export interface Channel extends events.EventEmitter {
@@ -31,13 +31,13 @@ export interface Channel extends events.EventEmitter {
 
 #### Java 版
 
-同上面讲解的 Node.js 版本都是一样，第一个参数 prefetchSize 是指预读取的消息内容大小上限，可以简单理解为消息有效载荷字节数组的最大长度限制，0 表示无上限
+同上面讲解的  版本都是一样，第一个参数 prefetchSize 是指预读取的消息内容大小上限，可以简单理解为消息有效载荷字节数组的最大长度限制，0 表示无上限
 
 ```java
 void BasicQos(uint prefetchSize, ushort prefetchCount, bool global);
 ```
 
-## 代码实践 Node.js 版
+## 代码实践  版
 
 **建立生产端**
 

@@ -10,7 +10,7 @@ Redis 是一个免费开源、基于内存的高性能 Key-Value 数据库，据
 
 Redis 号称具有 10W OPS（每秒10万次读写）的能力，Redis 是基于单线程模型，将数据存在于内存中，采用 C 语言(距操作系统最近的语言) 50000 行代码（单机版的 23000 行）编写。
 
-为什么单线程模型如此之快？取决于几个优点：基于内存、非阻塞IO、避免线程切换，这点和 Node.js 很相似，但是单线程需要注意由于一次只能运行一次命令，使用过程中要拒绝慢命令，例如 keys、flushall、flushdb、slow lua script、mutil/exec 等
+为什么单线程模型如此之快？取决于几个优点：基于内存、非阻塞IO、避免线程切换，这点和  很相似，但是单线程需要注意由于一次只能运行一次命令，使用过程中要拒绝慢命令，例如 keys、flushall、flushdb、slow lua script、mutil/exec 等
 
 **持久化**
 
@@ -22,7 +22,7 @@ Redis 支持丰富的数据类型，除了五个常见的的 String、HashTable�
 
 **多语言**
 
-基于 `TCP` 的通信方式，支持 `Node.js`、`Python`、`Java`、`Ruby`、`Lua` 等，可以参考 Redis 官方介绍 [https://redis.io/clients](https://redis.io/clients) ，每门语言可能会有好多个客户端，该如何选择呢？可以参考以下两点：
+基于 `TCP` 的通信方式，支持 ``、`Python`、`Java`、`Ruby`、`Lua` 等，可以参考 Redis 官方介绍 [https://redis.io/clients](https://redis.io/clients) ，每门语言可能会有好多个客户端，该如何选择呢？可以参考以下两点：
 
 * 首先可以选择标记有五角星 ⭐️ 的客户端
 * 有笑脸 😊 标记的说明该客户端最近 6 个月是活跃的

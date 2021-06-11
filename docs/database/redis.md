@@ -27,7 +27,6 @@ Redis 支持丰富的数据类型，除了五个常见的的 String、HashTable�
 * 首先可以选择标记有五角星 ⭐️ 的客户端
 * 有笑脸 😊 标记的说明该客户端最近 6 个月是活跃的
 
-![Nodejs Redis 客户端](./img/redis-client-language-nodejs.png)
 
 **多功能**
 
@@ -102,14 +101,6 @@ $ src/redis-server --port 6380 # 指定端口号启动
 
 ![图片](img/redis_start.png)
 
-**打开redis客户端**
-
-```javascript
-src/redis-cli -p 6380
-
-//指定服务器地址和端口
-src/redis-cli -h localhost -p 6380
-```
 
 **常用配置**
 
@@ -124,41 +115,6 @@ dbfilename "dump-7000.rdb" # rdb文件
 cluster-enabled yes # 集群模式
 cluster-config-file nodes-6380.conf # 集群本地配置文件
 cluster-require-full-coverange no # 整个集群节点全部在线才提供服务（进行关闭）
-```
-
-## Nodejs 客户端
-
-在 Node.js 中推荐客户端 [npmjs.com/package/ioredis](https://www.npmjs.com/package/ioredis) 
-
-**安装**
-
-```
-$ npm install ioredis -S
-```
-
-**基础应用**
-
-```js
-var Redis = require("ioredis");
-var redis = new Redis();
-
-redis.set("foo", "bar");
-redis.get("foo", function(err, result) {
-  console.log(result);
-});
-redis.del("foo");
-
-// Or using a promise if the last argument isn't a function
-redis.get("foo").then(function(result) {
-  console.log(result);
-});
-
-// Arguments to commands are flattened, so the following are the same:
-redis.sadd("set", 1, 3, 5, 7);
-redis.sadd("set", [1, 3, 5, 7]);
-
-// All arguments are passed directly to the redis server:
-redis.set("key", 100, "EX", 10);
 ```
 
 ## 阅读推荐

@@ -86,3 +86,5 @@ mysql binlog日志有三种模式
  
 
 
+
+

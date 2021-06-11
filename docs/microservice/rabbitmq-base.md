@@ -15,7 +15,6 @@ RabbitMQ 是一套开源（MPL）的消息队列服务软件，是由 LShift 提
 
 近两年谈的很多的一个概念**微服务**，在一个大型业务系统架构中，会被拆分成很多小的业务系统，这些业务系统之间如何建立通信呢？大家熟知的 HTTP、RPC 可以实现不同系统、不同语言之间的通信，除了这些往往还会使用消息队列（RabbitMQ、ActiveMQ、Kafafa 等）将这些系统链接起来，达到各系**统间的解耦**。
 
-另外，在后端使用 Node.js 哪怕开发一个稍微大点的系统，消息队列这些知识也是值得你去关注学习的。例如，生产端我可以使用 Node.js 生产一些数据放到队列中，另一段完全可以根据需要我使用 Python 或者其它语言去实现。
 
 ## RabbitMQ 应用场景
 
@@ -212,11 +211,7 @@ beam    4678 rabbitmq   49u  IPv6 294158      0t0  TCP *:amqp (LISTEN)
 - 创建消费者
 - 设置 channel
 
-### Node.js 版本
 
-**amqplib 客户端**
-
-Github: [https://github.com/squaremo/amqp.node](https://github.com/squaremo/amqp.node)
 
 ```
 $ npm install amqplib

@@ -148,6 +148,32 @@ var_dump($bst->preorderTraversal($a));
 ```
 
 ## 中序遍历
+```go
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
+func inorderTraversal(root *TreeNode) []int {
+	vals := []int{}
+	stack := list.New()
+	for root != nil || stack.Len() > 0 {
+		for root != nil {
+			stack.PushBack(root)
+			root = root.Left
+		}
+		back := stack.Back().Value.(*TreeNode)
+		vals = append(vals, back.Val)
+		stack.Remove(stack.Back())
+		root = back.Right
+	}
+	return vals
+}
+
+```
 ```php
 
 <?php
@@ -233,6 +259,30 @@ var_dump($bst->inorderTraversal($a));
 
 ```
 ## 后序遍历
+
+```go
+func postorderTraversal(root *TreeNode) []int {
+	vals := []int{}
+	var pre *TreeNode
+	stack := list.New()
+	for root != nil || stack.Len() > 0 {
+		for root != nil {
+			stack.PushBack(root)
+			root = root.Left
+		}
+		back := stack.Back().Value.(*TreeNode)
+		if back.Right==nil||back.Right==pre{
+			vals = append(vals, back.Val)
+			stack.Remove(stack.Back())
+			pre=back
+			root = nil
+		}else{
+			root=back.Right
+		}
+	}
+	return vals
+}
+```
 
 
 ```php

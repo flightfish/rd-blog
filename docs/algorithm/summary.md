@@ -45,6 +45,63 @@ func remainder(x, a, p int) int {
 ```
 
 # 离散化树状数组
+```go
+func countSmaller(nums []int) []int {
+	n:=len(nums)
+	set := map[int]struct{}{}
+	for _, num := range nums {
+		set[num] = struct{}{}
+	}
+	tmp := make([]int, 0,n)
+	for num := range set {
+		tmp = append(tmp, num)
+	}
+	sort.Ints(tmp)
+	for i := 0; i < n; i++ {
+		nums[i] = sort.SearchInts(tmp, nums[i]) + 1
+	}
+
+	bit := BIT{
+		n: len(nums),
+		tree: make([]int, n + 1),
+	}
+	resultList := []int{}
+	for i := len(nums) - 1; i >= 0; i-- {
+		id := nums[i]
+		resultList = append(resultList, bit.query(id - 1))
+		bit.update(id)
+	}
+	for i := 0; i < len(resultList)/2; i++ {
+		resultList[i], resultList[len(resultList)-1-i] = resultList[len(resultList)-1-i], resultList[i]
+	}
+	return resultList
+}
+
+
+type BIT struct {
+	n    int
+	tree []int
+}
+
+func (b BIT) lowBit(x int) int {
+	return x & (-x)
+}
+func (b BIT) query(x int) int {
+	ret := 0
+	for x > 0 {
+		ret += b.tree[x]
+		x -= b.lowBit(x)
+	}
+	return ret
+}
+
+func (b BIT) update(x int) {
+	for x <= b.n {
+		b.tree[x]++
+		x += b.lowBit(x)
+	}
+}
+```
 - [315. 计算右侧小于当前元素的个数](https://leetcode-cn.com/problems/count-of-smaller-numbers-after-self/)
 - [剑指 Offer 51. 数组中的逆序对](https://leetcode-cn.com/problems/shu-zu-zhong-de-ni-xu-dui-lcof/submissions)
 

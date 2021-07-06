@@ -17,6 +17,7 @@
 ## 技术栈目录
 
 * [`数据结构与算法`](/algorithm/README.md)
+* [`设计模式`](/designPatterns/index.md)
 * [`DataBase`](/database/README.md)
 * [`RabbitMQ`](/microservice/consul.md)
 * [`HTTP`](https://github.com/qufei1993/http-protocol)

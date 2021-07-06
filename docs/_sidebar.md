@@ -11,6 +11,8 @@
     - [BST 二叉搜索树](/algorithm/bst.md)
     - [graph  图](/algorithm/graph.md)
     - [经典算法](/algorithm/summary.md)
+- 设计模式 
+    - [设计模式](designPatterns/index.md)
 
 - Language | Go
     - [基础总结](go/go.md)

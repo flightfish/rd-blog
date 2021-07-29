@@ -134,3 +134,86 @@ func (b BIT) update(x int) {
 # 卡塔兰数
 
 # 并查集
+- [200. 岛屿数量](https://leetcode-cn.com/problems/number-of-islands/)
+```go
+func numIslands(grid [][]byte) int {
+	m, n := len(grid), len(grid[0])
+	if m==0{
+		return 0
+	}
+	obj:=Constructor(grid)
+	for i := 0; i < m; i++ {
+		for j := 0; j < n; j++ {
+			if grid[i][j] == '1'{
+				grid[i][j] = '0'
+				if i-1>=0&&grid[i-1][j]== '1'{
+					obj.union(i*n+j,(i-1)*n+j)
+				}
+				if i+1<m&&grid[i+1][j]== '1'{
+					obj.union(i*n+j,(i+1)*n+j)
+				}
+				if j-1>=0&&grid[i][j-1]== '1'{
+					obj.union(i*n+j,i*n+j-1)
+				}
+				if j+1<n&&grid[i][j+1]== '1'{
+					obj.union(i*n+j,i*n+j+1)
+				}
+			}
+		}
+	}
+	return obj.getCount()
+}
+
+type UnionFind struct {
+	count int
+	parent,rank []int
+}
+
+func  Constructor(grid [][]byte) UnionFind{
+	m, n := len(grid), len(grid[0])
+	parent := make([]int, m*n)
+	rank := make([]int, m*n)
+	count := 0
+	for i := 0; i < m; i++ {
+		for j := 0; j < n; j++ {
+			if grid[i][j] == '1' {
+				parent[i*n+j] = i*n + j
+				count++
+			}
+			rank[i*n+j] = 0
+		}
+	}
+	return UnionFind{
+		count:  count,
+		parent: parent,
+		rank:   rank,
+	}
+}
+
+func(this *UnionFind)  find(i int) int {
+	if this.parent[i]!=i {
+		this.parent[i]=this.find(this.parent[i])
+	}
+	return this.parent[i]
+}
+
+func(this *UnionFind)  union(x,y int) {
+	xRoot,yRoot:=this.find(x),this.find(y)
+	if xRoot!=yRoot{
+		if this.rank[xRoot]> this.rank[yRoot]{
+			this.parent[yRoot]=xRoot
+		}else if this.rank[xRoot]< this.rank[yRoot]{
+			this.parent[xRoot]=yRoot
+		}else {
+			this.parent[yRoot]=xRoot
+			this.rank[xRoot]++
+		}
+		this.count--
+	}
+}
+
+func(this *UnionFind)  getCount()int {
+	return this.count
+}
+```
+

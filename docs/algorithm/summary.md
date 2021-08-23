@@ -146,6 +146,8 @@ func (b BIT) update(x int) {
 
 # 卡塔兰数
 
+$E=mc^2$
+
 # 并查集
 - [200. 岛屿数量](https://leetcode-cn.com/problems/number-of-islands/)
 ```go

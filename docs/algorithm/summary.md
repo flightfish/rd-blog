@@ -146,6 +146,8 @@ func (b BIT) update(x int) {
 
 # 卡塔兰数
 
+C_{n} = \frac{C_{2n}^n}{n + 1}
+
 $E=mc^2$
 
 # 并查集

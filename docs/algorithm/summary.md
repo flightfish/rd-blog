@@ -182,12 +182,10 @@ func numIslands(grid [][]byte) int {
 	}
 	return obj.getCount()
 }
-
 type UnionFind struct {
 	count int
 	parent,rank []int
 }
-
 func  Constructor(grid [][]byte) UnionFind{
 	m, n := len(grid), len(grid[0])
 	parent := make([]int, m*n)
@@ -208,14 +206,12 @@ func  Constructor(grid [][]byte) UnionFind{
 		rank:   rank,
 	}
 }
-
 func(this *UnionFind)  find(i int) int {
 	if this.parent[i]!=i {
 		this.parent[i]=this.find(this.parent[i])
 	}
 	return this.parent[i]
 }
-
 func(this *UnionFind)  union(x,y int) {
 	xRoot,yRoot:=this.find(x),this.find(y)
 	if xRoot!=yRoot{
@@ -230,7 +226,6 @@ func(this *UnionFind)  union(x,y int) {
 		this.count--
 	}
 }
-
 func(this *UnionFind)  getCount()int {
 	return this.count
 }

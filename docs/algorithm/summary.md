@@ -146,7 +146,11 @@ func (b BIT) update(x int) {
 
 # 卡塔兰数
 
-$$ C_{n} = \frac{C_{2n}^n}{n + 1}
+```math
+C_{n}=\frac{C_{2n}^n}{n + 1}
+
+C_{n+1}=\frac{2*(2n+1)}{n + 2}C_{n}
+```
 
 # 并查集
 - [200. 岛屿数量](https://leetcode-cn.com/problems/number-of-islands/)

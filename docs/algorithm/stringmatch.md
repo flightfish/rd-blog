@@ -88,3 +88,38 @@ func generateBC(b []byte, m int, bc []int) {
 
 ##KMP
 
+```go
+func KMP(a []byte, n int, b []byte, m int)int {
+	next:=getNexts(b,m)
+	j:=0
+	for i := 0; i <n ; i++ {
+		for j>0&&a[i]!=b[j]{
+			j=next[j-1]+1
+		}
+		if a[i]==b[j]{
+			j++
+		}
+		if j==m{
+			return i-m+1
+		}
+	}
+	return -1
+}
+func getNexts(b []byte, m int)[]int{
+	next:=make([]int,m)
+	next[0]=-1
+	k:=-1
+	for i := 1; i <m ; i++ {
+		for k!=-1&&b[k+1]!=b[i] {
+			k=next[k]
+		}
+		if b[k+1]==b[i]{
+			k++
+		}
+		next[i]=k
+	}
+	return next
+}
+```
+
+

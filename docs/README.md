@@ -24,6 +24,7 @@
 * [`工具`](/tools/git.md)
 * [`面试`](/interview/lock.md)
 * [`其他`](/other/about-us.md)
+* [`书籍`](/book/README.md)
 
 ## 转载分享
 

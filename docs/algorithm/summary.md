@@ -1,6 +1,7 @@
 # 经典算法
 # Dijkstra算法
 
+- [743. 网络延迟时间](https://leetcode-cn.com/problems/network-delay-time/)
 # FLoyd算法
 - [399. 除法求值](https://leetcode-cn.com/problems/evaluate-division/)
 - [最短路径模板+解析——（FLoyd算法）](https://blog.csdn.net/ytuyzh/article/details/88617987)

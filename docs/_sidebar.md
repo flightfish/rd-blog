@@ -90,6 +90,7 @@
 
 
 * 其他
+    - [免费书籍](/book/README.md)
     - [关于后端技术栈](/other/about-us.md)
     - [转载&投稿合作](/other/reprint-contribution-collaboration.md)
     - [Blog 推荐](/other/blog.md)

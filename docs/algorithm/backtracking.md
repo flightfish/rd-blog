@@ -44,6 +44,61 @@ private void printQueens(int[] result) { // 打印出一个二维矩阵
 }
 ```
 
+```go
+var solutions [][]string
+func solveNQueens(n int) [][]string {
+	result:=make([]int,n)
+	solutions = [][]string{}
+	cal8queens(n,0,result)
+	return solutions
+}
+
+func cal8queens(n,x int,result []int) {
+	if x==n{
+		board := generateBoard(result, n)
+		fmt.Println(board)
+		solutions = append(solutions, board)
+		fmt.Println(solutions)
+		return
+	}
+	for y:= 0; y <n ; y++ {
+		if isOk(result,x,y,n){
+			result[x]=y
+			cal8queens(n,x+1,result)
+		}
+	}
+}
+func isOk(result []int, x, y, n int) bool {
+	leftUp, rightUp := y-1, y+1
+	for i := x - 1; i >= 0; i-- {
+		if result[i] == y {
+			return false
+		}
+		if leftUp >= 0 && result[i] == leftUp {
+			return false
+		}
+		if rightUp < n && result[i] == rightUp {
+			return false
+		}
+		leftUp--
+		rightUp++
+	}
+	return true
+}
+func generateBoard(queens []int, n int) []string {
+	board := []string{}
+	for i := 0; i < n; i++ {
+		row := make([]byte, n)
+		for j := 0; j < n; j++ {
+			row[j] = '.'
+		}
+		row[queens[i]] = 'Q'
+		board = append(board, string(row))
+	}
+	return board
+}
+```
+
 ## 0-1 背包
 ```java
 
@@ -61,6 +116,26 @@ public void f(int i, int cw, int[] items, int n, int w) {
   if (cw + items[i] <= w) {// 已经超过可以背包承受的重量的时候，就不要再装了
     f(i+1,cw + items[i], items, n, w);
   }
+}
+```
+```go
+//cw表示当前已经装进去的物品的重量和；i表示考察到哪个物品了；
+//w背包重量；items表示每个物品的重量；n表示物品个数
+//假设背包可承受重量100，物品个数10，物品重量存储在数组a中，那可以这样调用函数：
+var maxW = math.MinInt32
+
+func f(i, cw int, items []int, n, w int) {
+	if cw == w || i == n {
+		if cw > maxW {
+			maxW = cw
+		}
+		return
+	}
+
+	f(i+1, cw, items, n, w)
+	if cw+items[i] <= w {
+		f(i+1, cw+items[i], items, n, w)
+	}
 }
 ```
 

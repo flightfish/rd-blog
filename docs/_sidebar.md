@@ -30,7 +30,7 @@
     - [两表连接](database/mysql-join.md)  
     - [explain](database/mysql-explain.md)  
     - [事务](database/mysql-mvcc.md)
-    - [redo log](database/mysql-redo.md)
+    - [redo log](database/mysql-log.md)
     - [MVCC](database/mysql-mvcc.md)
     - [锁](database/mysql-lock.md)
 

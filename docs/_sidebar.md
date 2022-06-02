@@ -30,7 +30,7 @@
     - [两表连接](database/mysql-join.md)  
     - [explain](database/mysql-explain.md)  
     - [事务](database/mysql-mvcc.md)
-    - [redo log](database/mysql-redo.md)
+    - [redo log](database/mysql-log.md)
     - [MVCC](database/mysql-mvcc.md)
     - [锁](database/mysql-lock.md)
 
@@ -90,6 +90,7 @@
 
 
 * 其他
+    - [免费书籍](/book/README.md)
     - [关于后端技术栈](/other/about-us.md)
     - [转载&投稿合作](/other/reprint-contribution-collaboration.md)
     - [Blog 推荐](/other/blog.md)

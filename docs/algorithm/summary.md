@@ -1,6 +1,7 @@
 # 经典算法
 # Dijkstra算法
 
+- [743. 网络延迟时间](https://leetcode-cn.com/problems/network-delay-time/)
 # FLoyd算法
 - [399. 除法求值](https://leetcode-cn.com/problems/evaluate-division/)
 - [最短路径模板+解析——（FLoyd算法）](https://blog.csdn.net/ytuyzh/article/details/88617987)
@@ -123,6 +124,19 @@ func (b BIT) update(x int) {
 （2）如果组合问题需考虑元素之间的顺序，需将 target 放在外循环，将 arrs 放在内循环，且内循环正序。
 
 ## 例题
+
+首先是背包分类的模板：
+1、0/1背包：外循环nums,内循环target,target倒序且target>=nums[i];
+2、完全背包：外循环nums,内循环target,target正序且target>=nums[i];
+3、组合背包：外循环target,内循环nums,target正序且target>=nums[i];
+4、分组背包：这个比较特殊，需要三重循环：外循环背包bags,内部两层循环根据题目的要求转化为1,2,3三种背包类型的模板
+
+然后是问题分类的模板：
+1、最值问题: dp[i] = max/min(dp[i], dp[i-nums]+1)或dp[i] = max/min(dp[i], dp[i-num]+nums);
+2、存在问题(bool)：dp[i]=dp[i]||dp[i-num];
+3、组合问题：dp[i]+=dp[i-num];
+
+
 #### 01 背包问题：
 - [416. 分割等和子集](https://leetcode-cn.com/problems/partition-equal-subset-sum/)
 - [494. 目标和](https://leetcode-cn.com/problems/target-sum/)
@@ -133,4 +147,86 @@ func (b BIT) update(x int) {
 
 # 卡塔兰数
 
+$$ C_{n}=\frac{C_{2n}^n}{n + 1} ,
+
+\\C_{n+1}=\frac{2*(2n+1)}{n + 2}C_{n}
+
 # 并查集
+- [200. 岛屿数量](https://leetcode-cn.com/problems/number-of-islands/)
+```go
+func numIslands(grid [][]byte) int {
+	m, n := len(grid), len(grid[0])
+	if m==0{
+		return 0
+	}
+	obj:=Constructor(grid)
+	for i := 0; i < m; i++ {
+		for j := 0; j < n; j++ {
+			if grid[i][j] == '1'{
+				grid[i][j] = '0'
+				if i-1>=0&&grid[i-1][j]== '1'{
+					obj.union(i*n+j,(i-1)*n+j)
+				}
+				if i+1<m&&grid[i+1][j]== '1'{
+					obj.union(i*n+j,(i+1)*n+j)
+				}
+				if j-1>=0&&grid[i][j-1]== '1'{
+					obj.union(i*n+j,i*n+j-1)
+				}
+				if j+1<n&&grid[i][j+1]== '1'{
+					obj.union(i*n+j,i*n+j+1)
+				}
+			}
+		}
+	}
+	return obj.getCount()
+}
+type UnionFind struct {
+	count int
+	parent,rank []int
+}
+func  Constructor(grid [][]byte) UnionFind{
+	m, n := len(grid), len(grid[0])
+	parent := make([]int, m*n)
+	rank := make([]int, m*n)
+	count := 0
+	for i := 0; i < m; i++ {
+		for j := 0; j < n; j++ {
+			if grid[i][j] == '1' {
+				parent[i*n+j] = i*n + j
+				count++
+			}
+			rank[i*n+j] = 0
+		}
+	}
+	return UnionFind{
+		count:  count,
+		parent: parent,
+		rank:   rank,
+	}
+}
+func(this *UnionFind)  find(i int) int {
+	if this.parent[i]!=i {
+		this.parent[i]=this.find(this.parent[i])
+	}
+	return this.parent[i]
+}
+func(this *UnionFind)  union(x,y int) {
+	xRoot,yRoot:=this.find(x),this.find(y)
+	if xRoot!=yRoot{
+		if this.rank[xRoot]> this.rank[yRoot]{
+			this.parent[yRoot]=xRoot
+		}else if this.rank[xRoot]< this.rank[yRoot]{
+			this.parent[xRoot]=yRoot
+		}else {
+			this.parent[yRoot]=xRoot
+			this.rank[xRoot]++
+		}
+		this.count--
+	}
+}
+func(this *UnionFind)  getCount()int {
+	return this.count
+}
+```
+

@@ -23,7 +23,7 @@
 
 
 # 冒泡排序
-
+## Java语言版本
 ```java
 public static int[] bubbleSort(int[] arr) {
         if(arr == null || arr.length <= 1){
@@ -88,7 +88,10 @@ public static int[] bubbleSort(int[] arr) {
 
 ```
 
+## go语言版本
+
 # 插入排序
+## Java语言版本
 
 ```java
 public static int[]  insertSort(int[] arr){
@@ -148,7 +151,10 @@ public static int[]  insertSort(int[] arr){
     }
 
 ```
+## go语言版本
+
 # 希尔排序
+## java语言版本
 
 ```java
     private static int[] shellShort(int[] arr){
@@ -172,9 +178,10 @@ public static int[]  insertSort(int[] arr){
         return arr;
     }
 ```
+## go语言版本
 
 # 选择排序
-
+## java语言版本
 ```java
  public static  int[] selectionSort(int[] arr){
         if (arr == null || arr.length <= 1) {
@@ -203,6 +210,7 @@ public static int[]  insertSort(int[] arr){
 
 堆排序是一种树形选择排序，是对直接选择排序的有效改进。具体的分析我们留到后面讲堆排序时再详细说明。
 ```
+## go语言版本
 
 # 快速排序
 

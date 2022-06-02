@@ -634,6 +634,7 @@ func mergeSort(arr []int,low,high int)  {
 	}
 
 	n:=high-low+1
+    k:=0
 	result:=make([]int,n)
 	for block := 1; block <n ; block*=2 {
 		for start := 0; start <n ; start+= 2 * block {
@@ -650,28 +651,30 @@ func mergeSort(arr []int,low,high int)  {
 			 start2,end2:= mid,high
 			for start1 < end1 && start2 < end2 {
 				if arr[start1] < arr[start2]{
-					result[low]=arr[start1]
+					result[k]=arr[start1]
 					start1++
 				}else{
-					result[low]=arr[start2]
+					result[k]=arr[start2]
 					start2++
 				}
-				low++
+				k++
 			}
 			for start1 < end1 {
-				result[low] = arr[start1]
+				result[k] = arr[start1]
 				start1++
-				low++
+				k++
 			}
 			for start2 < end2 {
-				result[low] = arr[start2]
+				result[k] = arr[start2]
 				start2++
-				low++
+				k++
 			}
 			fmt.Println(result)
 		}
-		copy(arr,result)
-
+		 // 把新数组中的数覆盖nums数组
+         for i := low; i <=high ; i++ {
+           arr[i]=result[i-low]
+        }
 	}
 }
 

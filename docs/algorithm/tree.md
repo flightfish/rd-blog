@@ -477,6 +477,83 @@ PHP用递归、非递归方式实现二叉树的层次遍历
 ```
 
 # 二叉查找树(O(logn))
+```go
+
+func insert(root *TreeNode, data int) {
+	if root == nil {
+		root = &TreeNode{data, nil, nil}
+	}
+
+	p := root
+	for p != nil {
+		if data > p.Val {
+			if p.Right == nil {
+				p.Right = &TreeNode{data, nil, nil}
+				return
+			} else {
+				p = p.Right
+			}
+		} else {
+			if p.Left == nil {
+				p.Left = &TreeNode{data, nil, nil}
+				return
+			} else {
+				p = p.Left
+			}
+		}
+	}
+}
+
+func delete(root *TreeNode, data int) {
+	p := root // p指向要删除的节点，初始化指向根节点
+	var pp *TreeNode // pp记录的是p的父节点
+	for p != nil && p.Val != data {
+		pp = p
+		if data > p.Val {
+			p = p.Right
+		} else {
+			p = p.Left
+		}
+	}
+	if p == nil {
+		return // 没有找到
+	}
+
+	// 要删除的节点有两个子节点
+	if p.Left != nil && p.Right != nil {
+		minP := p.Right
+		minPP := p
+		for minP.Left != nil {
+			minPP = minP
+			minP = minP.Left
+		}
+		p.Val = minP.Val
+		p = minP
+		pp = minPP
+	}
+
+	//// 删除节点是叶子节点或者仅有一个子节点
+
+	var child *TreeNode
+	if p.Left != nil {
+		child = p.Left
+	} else if p.Right != nil {
+		child = p.Right
+	} else {
+		child = nil
+	}
+
+	if pp == nil {
+		root = child
+	} else if pp.Left == p {
+		pp.Left = child
+	} else {
+		pp.Right = child
+	}
+}
+
+
+```
 
 ## 二叉查找树对比散列表的优点
 - 第一，散列表中的数据是无序存储的，如果要输出有序的数据，需要先进行排序。而对于二叉查找树来说，我们只需要中序遍历，就可以在 O(n) 的时间复杂度内，输出有序的数据序列。

@@ -89,6 +89,67 @@ public static int[] bubbleSort(int[] arr) {
 ```
 
 ## go语言版本
+```go
+func bubbleSort(arr []int) {
+	n:=len(arr)
+	if n<=1{
+		return
+	}
+	for i := 0; i <n ; i++ {
+		for j := 0; j <n-1-i ; j++ {
+			if arr[j]>arr[j+1]{
+				a[j],a[j+1]=a[j+1],a[j]
+			}
+		}
+	}
+}
+    
+    //通过设置标志位来记录此次遍历有无数据交换，进而可以判断是否要继续循环，设置一个flag标记，
+    //当在一趟序列中没有发生交换，则该序列已排序好，但优化后排序的时间复杂度没有发生量级的改变。
+    func bubbleSort(arr []int) {
+    	n := len(arr)
+    	if n <= 1 {
+    		return
+    	}
+    	for i := 0; i < n; i++ {
+    		flag := true
+    		for j := 0; j < n-1-i; j++ {
+    			if arr[j] > arr[j+1] {
+    				a[j], a[j+1] = a[j+1], a[j]
+    				flag = false
+    			}
+    		}
+    		if flag {
+    			break
+    		}
+    	}
+    }
+
+
+    
+    //记录某次遍历时最后发生数据交换的位置pos，这个位置之后的数据显然已经有序了。
+    //因此通过记录最后发生数据交换的位置就可以确定下次循环的范围了。由于pos位置之后的记录均已交换到位,故在进行下一趟排序时只要扫描到pos位置即可。
+
+    func bubbleSort(arr []int) {
+    	n := len(arr)
+    	if n <= 1 {
+    		return
+    	}
+    	var k, flag int
+    	flag = n
+    	for flag > 0 {
+    		k = flag
+    		flag = 0
+    		for j := 0; j < k-1; j++ {
+    			if arr[j] > arr[j+1] {
+    				a[j], a[j+1] = a[j+1], a[j]
+    				flag = j + 1
+    			}
+    		}
+    	}
+    }
+
+```
 
 # 插入排序
 ## Java语言版本

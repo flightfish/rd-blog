@@ -213,6 +213,60 @@ public static int[]  insertSort(int[] arr){
 
 ```
 ## go语言版本
+```go
+func insertSort(arr []int) {
+	n := len(arr)
+	if n <= 1 {
+		return
+	}
+	var j int
+	for i := 1; i < n; i++ {
+		value := a[i]
+		for j = i - 1; j > 0; j-- {
+			if arr[j] > value {
+				arr[j+1] = arr[j]
+			} else {
+				break
+			}
+		}
+		arr[j+1] = value
+	}
+}
+    
+① 从第一个元素开始，该元素可以认为已经被排序
+② 取出下一个元素，在已经排序的元素序列中二分查找到第一个比它大的数的位置
+③ 将新元素插入到该位置后
+④ 重复上述两步
+//二分插入排序相对直接插入排序而言：平均性能更快，时间复杂度降至O(NlogN)，排序是稳定的，
+//但排序的比较次数与初始序列无关，相比直接插入排序，在速度上有一定提升。
+
+func insertSort(arr []int) {
+	n := len(arr)
+	if n <= 1 {
+		return
+	}
+	var left, right, mid int
+	for i := 1; i < n; i++ {
+		value := a[i]
+		left = 0
+		right = i - 1
+		for left <= right {
+			mid = (left + right) / 2
+			if arr[mid] > value {
+				right = mid - 1
+			} else {
+				left = mid + 1
+			}
+		}
+		for j := i - 1; j <= left; j-- {
+			arr[j+1] = arr[j]
+		}
+		arr[left] = value
+	}
+}
+
+
+```
 
 # 希尔排序
 ## java语言版本
@@ -240,6 +294,28 @@ public static int[]  insertSort(int[] arr){
     }
 ```
 ## go语言版本
+```go
+func shellShort(arr []int) {
+	n := len(arr)
+	if n <= 1 {
+		return
+	}
+	var i,j,gap int
+	for  gap = n / 2; gap > 0; gap /= 2 {
+		for i = gap; i < n; i++ {
+			value := a[i]
+			for j = i - gap; j > 0; j-=gap {
+				if arr[j] > value {
+					arr[j+gap] = arr[j]
+				} else {
+					break
+				}
+			}
+			arr[j+gap] = value
+		}
+	}
+}
+```
 
 # 选择排序
 ## java语言版本
@@ -272,6 +348,24 @@ public static int[]  insertSort(int[] arr){
 堆排序是一种树形选择排序，是对直接选择排序的有效改进。具体的分析我们留到后面讲堆排序时再详细说明。
 ```
 ## go语言版本
+```go
+func selectionSort(arr []int) {
+	n := len(arr)
+	if n <= 1 {
+		return
+	}
+
+	for i := 0; i < n-1; i++ {
+		min := i
+		for j := i + 1; j < n; j++ {
+			if arr[min] < arr[j] {
+				min = j
+			}
+		}
+		arr[i], arr[min] = arr[min], arr[i]
+	}
+}
+```
 
 # 快速排序
 

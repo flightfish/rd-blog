@@ -73,4 +73,4 @@ Redis 所有的数据结构都可以设置过期时间，时间到了，Redis �
 
 
 ![mysql_server](https://cdn.nlark.com/yuque/0/2022/png/1204728/1653642897928-e21d3704-e6c8-4572-b544-ec3322cf9e24.png)
-[![piclink](https://cdn.nlark.com/yuque/0/2022/png/1204728/1653642897928-e21d3704-e6c8-4572-b544-ec3322cf9e24.png)](../../xxx.md)
+[![piclink](https://cdn.nlark.com/yuque/0/2022/png/1204728/1653642897928-e21d3704-e6c8-4572-b544-ec3322cf9e24.png)](../../Redis基础数据结构.md)

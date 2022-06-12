@@ -72,4 +72,4 @@ Redis 所有的数据结构都可以设置过期时间，时间到了，Redis �
 - 自己始终知道哪些字段可用，防止使用mget时获取不到想要的数据
 
 
-![mysql_server](https://cdn.nlark.com/yuque/0/2022/png/1204728/1653642897928-e21d3704-e6c8-4572-b544-ec3322cf9e24.png#clientId=ue20b33b7-4ac3-4&crop=0&crop=0&crop=1&crop=1&from=paste&id=u3d47966b&margin=%5Bobject%20Object%5D&name=image.png&originHeight=169&originWidth=572&originalType=binary&ratio=1&rotation=0&showTitle=false&size=3006&status=done&style=none&taskId=u1754464f-284d-4942-99d1-c3f0a637571&title=)
+![mysql_server](https://cdn.nlark.com/yuque/0/2022/png/1204728/1653642897928-e21d3704-e6c8-4572-b544-ec3322cf9e24.png)

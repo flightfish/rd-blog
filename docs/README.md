@@ -20,7 +20,7 @@
 * [`设计模式`](/designPatterns/index.md)
 * [`DataBase`](/database/README.md)
 * [`RabbitMQ`](/microservice/consul.md)
-* [`HTTP`](https://github.com/qufei1993/http-protocol)
+* [`HTTP`](/networkprogram/http.md)
 * [`工具`](/tools/git.md)
 * [`面试`](/interview/lock.md)
 * [`其他`](/other/about-us.md)

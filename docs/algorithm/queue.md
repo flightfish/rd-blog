@@ -80,3 +80,9 @@ QueueStudy.prototype.deQueue = function() {
 
 ![](./img/queue-ring.png)
 
+
+![](./im)g/queue-ring.png
+<img src="http://upload.techweb.com.cn/2017/0106/1483690985396.jpg" width="200px" height="200px" />
+
+
+

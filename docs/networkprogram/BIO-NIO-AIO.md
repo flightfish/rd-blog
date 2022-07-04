@@ -8,11 +8,11 @@
 
    **Java BIO**：`同步并阻塞`（传统阻塞型），服务器实现模式为一个连接一个线程，即客户端有连接请求时服务器端就需要启动一个线程进行处理，如果这个连接不作任何事情会造成不必要的线程开销。
 
-   ![BIO](https://segmentfault.com/img/remote/1460000037714809)
+   ![BIO.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/39fea0a088f145fcb52123ac904874eb~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?)
 
    **Java NIO**：`同步非阻塞`，服务器实现模式为一个线程处理多个请求(连接)，即客户端发送的连接请求会被注册到多路复用器上，多路复用器轮询到有 I/O 请求就会进行处理。
 
-   ![NIO](https://segmentfault.com/img/remote/1460000037714808)
+   ![NIO](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a60e2f734525487aa43738d88a26b9d9~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?)
 
    **Java AIO**：`异步非阻塞`，AIO 引入了异步通道的概念，采用了 Proactor 模式，简化了程序编写，有效的请求才启动线程，它的特点是先由操作系统完成后才通知服务端程序启动线程去处理，一般适用于连接数较多且连接时间较长的应用。
 
